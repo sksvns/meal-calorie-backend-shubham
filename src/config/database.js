@@ -12,12 +12,7 @@ const connectDB = async () => {
             }
         );
         
-        await mongoose.connect(mongoURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-            useFindAndModify: false
-        });
+        await mongoose.connect(mongoURI);
         logger.info('MongoDB connected successfully');
     } catch (error) {
         logger.error('MongoDB connection error:', error.message);
