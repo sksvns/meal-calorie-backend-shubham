@@ -18,7 +18,13 @@ app.use(express.json());
 app.use(compression());
 app.use(helmet());
 app.use(hpp());
-app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
+app.use(cors({
+  origin: [
+    'http://localhost:3001',
+    'https://meal-calorie-frontend-shubham.onrender.com'
+  ],
+  credentials: true
+}));
 
 // Sentry initialization (add SENTRY_DSN to your .env file for production)
 if (process.env.SENTRY_DSN) {
