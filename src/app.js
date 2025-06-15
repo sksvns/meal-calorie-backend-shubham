@@ -8,6 +8,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const hpp = require('hpp');
 const Sentry = require('@sentry/node');
+const cors = require('cors');
 const environment = require('./config/environment');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(compression());
 app.use(helmet());
 app.use(hpp());
+app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
 
 // Sentry initialization (add SENTRY_DSN to your .env file for production)
 if (process.env.SENTRY_DSN) {
