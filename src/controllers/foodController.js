@@ -1,5 +1,5 @@
 const FoodData = require('../models/FoodData');
-const usdaApiService = require('../services/usdaApiService');
+const usdaApiService = require('../services/usdaApiServiceWithCircuitBreaker');
 const logger = require('../utils/logger');
 const validators = require('../utils/validators');
 

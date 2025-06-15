@@ -3,7 +3,7 @@ const authRoutes = require('./routes/authRoutes');
 const foodRoutes = require('./routes/foodRoutes');
 const errorHandler = require('./middleware/errorHandler');
 const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
-const usdaCircuitBreakerMiddleware = require('./middleware/circuitBreaker');
+const { usdaCircuitBreakerMiddleware } = require('./middleware/circuitBreaker');
 
 const app = express();
 
