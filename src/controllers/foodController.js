@@ -104,18 +104,21 @@ exports.getCaloriesForDish = async (req, res) => {
         const caloriesPerServing = calorieNutrient.amount;
         const totalCalories = caloriesPerServing * servings;
         
-        // Cache the result
+        // Cache the result using upsert to avoid duplicate key errors
         try {
-            await FoodData.create({
-                foodId: foodDetails.fdcId.toString(),
-                name: dish_name,
-                calories: caloriesPerServing,
-                protein: 0, // Not required for this endpoint
-                fat: 0,     // Not required for this endpoint
-                carbohydrates: 0 // Not required for this endpoint
-            });
+            await FoodData.findOneAndUpdate(
+                { foodId: foodDetails.fdcId.toString() },
+                {
+                    name: dish_name,
+                    calories: caloriesPerServing,
+                    protein: 0, // Not required for this endpoint
+                    fat: 0,     // Not required for this endpoint
+                    carbohydrates: 0 // Not required for this endpoint
+                },
+                { upsert: true, new: true, setDefaultsOnInsert: true }
+            );
         } catch (cacheError) {
-            // If caching fails (e.g., duplicate key), just log and continue
+            // If caching fails, just log and continue
             logger.error('Error caching dish data:', cacheError.message);
         }
         
