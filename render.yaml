@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: meal-calorie-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000 # Render sets PORT automatically, but your code should use process.env.PORT
+      - key: MONGODB_URI
+        sync: false # Set this in the Render dashboard
+      - key: USDA_API_KEY
+        sync: false # Set this in the Render dashboard
+      - key: JWT_SECRET
+        sync: false # Set this in the Render dashboard
+      - key: SENTRY_DSN
+        sync: false # Optional, set in the Render dashboard if using Sentry
